@@ -1,4 +1,5 @@
 import 'package:fic_furniture_shop/customs/color_custom.dart';
+import 'package:fic_furniture_shop/views/detail_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -92,70 +93,250 @@ class _HomeViewState extends State<HomeView> {
                   height: 20,
                 ),
                 GridView(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                    shrinkWrap: true,
-                    children: [
-                      SizedBox(
-                          height: 700,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  shrinkWrap: true,
+                  children: [
+                    InkWell(
+                      onTap: () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailView(
+                                    title: 'Stylish Chair',
+                                    price: '\$170',
+                                  ))),
+                      child: SizedBox(
+                        height: 170,
+                        width: double.infinity,
+                        child: Card(
+                            margin: const EdgeInsets.only(right: 20, bottom: 0),
+                            elevation: 0,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 120,
+                                  width: double.infinity,
+                                  child: Image.asset(
+                                    'assets/images/chair1.png',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10),
+                                    child: Column(
+                                      children: [
+                                        const Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text('Stylish Chair'),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '\$170',
+                                              style: TextStyle(color: grey),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Image.asset(
+                                                    'assets/images/solidstar_icon.png'),
+                                                const SizedBox(
+                                                  width: 8,
+                                                ),
+                                                Text(
+                                                  '4.8',
+                                                  style: TextStyle(color: grey),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    )),
+                              ],
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 170,
+                      width: double.infinity,
+                      child: Card(
+                          margin: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 0),
+                          elevation: 0,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
                           child: Column(
                             children: [
-                              Container(
-                                margin: const EdgeInsets.only(
-                                    right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage(
-                                      'assets/images/chair1.png',
-                                    ),
-                                  ),
+                              SizedBox(
+                                height: 130,
+                                width: double.infinity,
+                                child: Image.asset(
+                                  'assets/images/chair2.png',
+                                  fit: BoxFit.fill,
                                 ),
                               ),
-                              Container(
-                                margin: const EdgeInsets.only(
-                                    right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage(
-                                      'assets/images/chair2.png',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(
-                                    right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage(
-                                      'assets/images/chair3.png',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(
-                                    right: 20, bottom: 20),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage(
-                                      'assets/images/chair4.png',
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Column(
+                                    children: [
+                                      const Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text('Modern Table'),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            '\$75',
+                                            style: TextStyle(color: grey),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                  'assets/images/solidstar_icon.png'),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                '4.9',
+                                                style: TextStyle(color: grey),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )),
                             ],
                           )),
-                    ])
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 10),
+                      height: 200,
+                      width: double.infinity,
+                      child: Card(
+                          margin: const EdgeInsets.only(
+                              right: 20, top: 0, bottom: 0),
+                          elevation: 0,
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 130,
+                                width: double.infinity,
+                                child: Image.asset(
+                                  'assets/images/chair3.png',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Column(
+                                    children: [
+                                      const Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text('Wooden Console'),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            '\$240',
+                                            style: TextStyle(color: grey),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                  'assets/images/solidstar_icon.png'),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                '4.7',
+                                                style: TextStyle(color: grey),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 10),
+                      height: 170,
+                      width: double.infinity,
+                      child: Card(
+                          margin: const EdgeInsets.only(
+                              right: 10, left: 10, bottom: 0),
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 130,
+                                width: double.infinity,
+                                child: Image.asset(
+                                  'assets/images/chair4.png',
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Column(
+                                    children: [
+                                      const Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text('Brown Armchair'),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            '\$210',
+                                            style: TextStyle(color: grey),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                  'assets/images/solidstar_icon.png'),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                '4.9',
+                                                style: TextStyle(color: grey),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )),
+                            ],
+                          )),
+                    ),
+                  ],
+                )
               ],
             )));
   }
