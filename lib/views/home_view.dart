@@ -17,8 +17,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: whiteTwo,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: whiteTwo,
           elevation: 0,
           leading: InkWell(
             onTap: () {},

@@ -138,7 +138,11 @@ class _DetailViewState extends State<DetailView> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('${widget.title}'),
-                                    Text('${widget.price}'),
+                                    Text(
+                                      '${widget.price}',
+                                      style: TextStyle(
+                                          color: greyTwo, fontSize: 26),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 10),
