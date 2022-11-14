@@ -1,5 +1,6 @@
 import 'package:fic_furniture_shop/customs/color_custom.dart';
 import 'package:fic_furniture_shop/views/detail_view.dart';
+import 'package:fic_furniture_shop/widgets/open_drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -15,11 +16,14 @@ class _HomeViewState extends State<HomeView> {
   int selected = 1;
   PageController pageControler = PageController();
   var duration = const Duration(milliseconds: 500);
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       backgroundColor: whiteTwo,
+      drawer: openDrawer(),
       appBar: PreferredSize(
           preferredSize:
               Size.fromHeight(MediaQuery.of(context).size.height / 4.5),
@@ -29,7 +33,9 @@ class _HomeViewState extends State<HomeView> {
                 backgroundColor: whiteTwo,
                 elevation: 0,
                 leading: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    _key.currentState!.openDrawer();
+                  },
                   child: Image.asset(
                     'assets/images/menu_icon.png',
                     height: 18,
