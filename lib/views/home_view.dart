@@ -49,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
                 centerTitle: true,
                 actions: [
                   Padding(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 10),
                     child: isSearch
                         ? Container(
                             width: MediaQuery.of(context).size.width / 1.3,
@@ -58,7 +58,8 @@ class _HomeViewState extends State<HomeView> {
                               border: Border.all(color: Colors.grey),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.only(left: 10, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
                               child: TextFormField(
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -69,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
                                           isSearch = false;
                                         });
                                       },
-                                      child: Icon(Icons.cancel),
+                                      child: const Icon(Icons.cancel),
                                     )),
                               ),
                             ),

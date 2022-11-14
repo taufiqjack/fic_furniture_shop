@@ -83,15 +83,15 @@ class _DetailViewState extends State<DetailView> {
         ),
         extendBodyBehindAppBar: true,
         body: Stack(
+          alignment: Alignment.topCenter,
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage(
-                  'assets/images/chair5.png',
-                ),
-                fit: BoxFit.fill,
-              )),
+            Positioned.fill(
+              child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Image.asset(
+                    'assets/images/chair5.png',
+                    fit: BoxFit.fitWidth,
+                  )),
             ),
             Align(
               alignment: Alignment.bottomCenter,
