@@ -17,6 +17,7 @@ class _HomeViewState extends State<HomeView> {
   PageController pageControler = PageController();
   var duration = const Duration(milliseconds: 500);
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  bool isSearch = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,41 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 centerTitle: true,
                 actions: [
-                  InkWell(
-                    child: Image.asset('assets/images/search_icon.png'),
-                  )
+                  Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: isSearch
+                        ? Container(
+                            width: MediaQuery.of(context).size.width / 1.3,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.grey),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'search',
+                                    suffixIcon: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          isSearch = false;
+                                        });
+                                      },
+                                      child: Icon(Icons.cancel),
+                                    )),
+                              ),
+                            ),
+                          )
+                        : InkWell(
+                            onTap: () {
+                              setState(() {
+                                isSearch = !isSearch;
+                              });
+                            },
+                            child: Image.asset('assets/images/search_icon.png'),
+                          ),
+                  ),
                 ],
               ),
               Padding(
@@ -216,137 +249,44 @@ class _HomeViewState extends State<HomeView> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Recommended Furniture',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GridView(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                    shrinkWrap: true,
-                    children: [
-                      InkWell(
-                        onTap: () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DetailView(
-                                      title: 'Stylish Chair',
-                                      price: '\$170',
-                                      image: 'assets/images/chair1.png',
-                                    ))),
-                        child: SizedBox(
-                          height: 170,
-                          width: double.infinity,
-                          child: Stack(children: [
-                            Card(
-                                margin:
-                                    const EdgeInsets.only(right: 20, bottom: 0),
-                                elevation: 0,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 120,
-                                      width: double.infinity,
-                                      child: Image.asset(
-                                        'assets/images/chair1.png',
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Column(
-                                          children: [
-                                            const Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text('Stylish Chair'),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '\$170',
-                                                  style: TextStyle(color: grey),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Image.asset(
-                                                        'assets/images/solidstar_icon.png'),
-                                                    const SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                      '4.8',
-                                                      style: TextStyle(
-                                                          color: grey),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        )),
-                                  ],
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8, top: 8),
-                              child: Container(
-                                height: 34,
-                                width: 34,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: white),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      isLike[0] = !isLike[0];
-                                    });
-                                  },
-                                  child: !isLike[0]
-                                      ? Image.asset(
-                                          'assets/images/favorite_icon.png')
-                                      : const Icon(
-                                          Icons.favorite,
-                                          color: Colors.red,
-                                        ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Recommended Furniture',
+                        style: TextStyle(fontSize: 16),
                       ),
-                      InkWell(
-                        onTap: () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DetailView(
-                                      title: 'Modern Table',
-                                      price: '\$75',
-                                      image: 'assets/images/chair2.png',
-                                    ))),
-                        child: SizedBox(
-                          height: 170,
-                          width: double.infinity,
-                          child: Stack(
-                            children: [
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GridView(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16,
+                      ),
+                      shrinkWrap: true,
+                      children: [
+                        InkWell(
+                          onTap: () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DetailView(
+                                        title: 'Stylish Chair',
+                                        price: '\$170',
+                                        image: 'assets/images/chair1.png',
+                                      ))),
+                          child: SizedBox(
+                            height: 170,
+                            width: double.infinity,
+                            child: Stack(children: [
                               Card(
                                   margin: const EdgeInsets.only(
-                                      left: 10, right: 10, bottom: 0),
+                                      right: 20, bottom: 0),
                                   elevation: 0,
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
                                   shape: RoundedRectangleBorder(
@@ -354,10 +294,10 @@ class _HomeViewState extends State<HomeView> {
                                   child: Column(
                                     children: [
                                       SizedBox(
-                                        height: 130,
+                                        height: 120,
                                         width: double.infinity,
                                         child: Image.asset(
-                                          'assets/images/chair2.png',
+                                          'assets/images/chair1.png',
                                           fit: BoxFit.fill,
                                         ),
                                       ),
@@ -368,7 +308,7 @@ class _HomeViewState extends State<HomeView> {
                                             children: [
                                               const Align(
                                                 alignment: Alignment.centerLeft,
-                                                child: Text('Modern Table'),
+                                                child: Text('Stylish Chair'),
                                               ),
                                               Row(
                                                 mainAxisAlignment:
@@ -376,9 +316,10 @@ class _HomeViewState extends State<HomeView> {
                                                         .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    '\$75',
-                                                    style:
-                                                        TextStyle(color: grey),
+                                                    '\$170',
+                                                    style: TextStyle(
+                                                        color: grey,
+                                                        fontSize: 20),
                                                   ),
                                                   Row(
                                                     children: [
@@ -388,7 +329,7 @@ class _HomeViewState extends State<HomeView> {
                                                         width: 8,
                                                       ),
                                                       Text(
-                                                        '4.9',
+                                                        '4.8',
                                                         style: TextStyle(
                                                             color: grey),
                                                       ),
@@ -411,10 +352,10 @@ class _HomeViewState extends State<HomeView> {
                                   child: InkWell(
                                     onTap: () {
                                       setState(() {
-                                        isLike[1] = !isLike[1];
+                                        isLike[0] = !isLike[0];
                                       });
                                     },
-                                    child: !isLike[1]
+                                    child: !isLike[0]
                                         ? Image.asset(
                                             'assets/images/favorite_icon.png')
                                         : const Icon(
@@ -424,205 +365,312 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                 ),
                               ),
-                            ],
+                            ]),
                           ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DetailView(
-                                      title: 'Wooden Console',
-                                      price: '\$240',
-                                      image: 'assets/images/chair3.png',
-                                    ))),
-                        child: Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          height: 200,
-                          width: double.infinity,
-                          child: Stack(children: [
-                            Card(
-                                margin: const EdgeInsets.only(
-                                    right: 20, top: 0, bottom: 0),
-                                elevation: 0,
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 130,
-                                      width: double.infinity,
-                                      child: Image.asset(
-                                        'assets/images/chair3.png',
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Column(
-                                          children: [
-                                            const Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text('Wooden Console'),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                        InkWell(
+                          onTap: () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DetailView(
+                                        title: 'Modern Table',
+                                        price: '\$75',
+                                        image: 'assets/images/chair2.png',
+                                      ))),
+                          child: SizedBox(
+                            height: 170,
+                            width: double.infinity,
+                            child: Stack(
+                              children: [
+                                Card(
+                                    margin: const EdgeInsets.only(
+                                        left: 10, right: 10, bottom: 0),
+                                    elevation: 0,
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 130,
+                                          width: double.infinity,
+                                          child: Image.asset(
+                                            'assets/images/chair2.png',
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                        Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            child: Column(
                                               children: [
-                                                Text(
-                                                  '\$240',
-                                                  style: TextStyle(color: grey),
+                                                const Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text('Modern Table'),
                                                 ),
                                                 Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
-                                                    Image.asset(
-                                                        'assets/images/solidstar_icon.png'),
-                                                    const SizedBox(
-                                                      width: 8,
-                                                    ),
                                                     Text(
-                                                      '4.7',
+                                                      '\$75',
                                                       style: TextStyle(
-                                                          color: grey),
+                                                          color: grey,
+                                                          fontSize: 20),
                                                     ),
+                                                    Row(
+                                                      children: [
+                                                        Image.asset(
+                                                            'assets/images/solidstar_icon.png'),
+                                                        const SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                        Text(
+                                                          '4.9',
+                                                          style: TextStyle(
+                                                              color: grey),
+                                                        ),
+                                                      ],
+                                                    )
                                                   ],
                                                 )
                                               ],
-                                            )
-                                          ],
-                                        )),
-                                  ],
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8, top: 8),
-                              child: Container(
-                                height: 34,
-                                width: 34,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: white),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      isLike[2] = !isLike[2];
-                                    });
-                                  },
-                                  child: !isLike[2]
-                                      ? Image.asset(
-                                          'assets/images/favorite_icon.png')
-                                      : const Icon(
-                                          Icons.favorite,
-                                          color: Colors.red,
-                                        ),
-                                ),
-                              ),
-                            ),
-                          ]),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DetailView(
-                                      title: 'Brown Armchair',
-                                      price: '\$210',
-                                      image: 'assets/images/chair4.png',
-                                    ))),
-                        child: Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          height: 170,
-                          width: double.infinity,
-                          child: Stack(children: [
-                            Card(
-                                margin: const EdgeInsets.only(
-                                    right: 10, left: 10, bottom: 0),
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 130,
-                                      width: double.infinity,
-                                      child: Image.asset(
-                                        'assets/images/chair4.png',
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Column(
-                                          children: [
-                                            const Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text('Brown Armchair'),
+                                            )),
+                                      ],
+                                    )),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 16, top: 8),
+                                  child: Container(
+                                    height: 34,
+                                    width: 34,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: white),
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          isLike[1] = !isLike[1];
+                                        });
+                                      },
+                                      child: !isLike[1]
+                                          ? Image.asset(
+                                              'assets/images/favorite_icon.png')
+                                          : const Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '\$210',
-                                                  style: TextStyle(color: grey),
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Image.asset(
-                                                        'assets/images/solidstar_icon.png'),
-                                                    const SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    Text(
-                                                      '4.9',
-                                                      style: TextStyle(
-                                                          color: grey),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        )),
-                                  ],
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8, top: 8),
-                              child: Container(
-                                height: 34,
-                                width: 34,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: white),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      isLike[3] = !isLike[3];
-                                    });
-                                  },
-                                  child: !isLike[3]
-                                      ? Image.asset(
-                                          'assets/images/favorite_icon.png')
-                                      : const Icon(
-                                          Icons.favorite,
-                                          color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DetailView(
+                                        title: 'Wooden Console',
+                                        price: '\$240',
+                                        image: 'assets/images/chair3.png',
+                                      ))),
+                          child: Container(
+                            padding: const EdgeInsets.only(top: 0),
+                            height: 170,
+                            width: double.infinity,
+                            child: Stack(children: [
+                              Card(
+                                  margin: const EdgeInsets.only(
+                                      right: 20, top: 0, bottom: 0),
+                                  elevation: 0,
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 130,
+                                        width: double.infinity,
+                                        child: Image.asset(
+                                          'assets/images/chair3.png',
+                                          fit: BoxFit.fill,
                                         ),
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Column(
+                                            children: [
+                                              const Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text('Wooden Console'),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '\$240',
+                                                    style: TextStyle(
+                                                        color: grey,
+                                                        fontSize: 20),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Image.asset(
+                                                          'assets/images/solidstar_icon.png'),
+                                                      const SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      Text(
+                                                        '4.7',
+                                                        style: TextStyle(
+                                                            color: grey),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          )),
+                                    ],
+                                  )),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8, top: 8),
+                                child: Container(
+                                  height: 34,
+                                  width: 34,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: white),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isLike[2] = !isLike[2];
+                                      });
+                                    },
+                                    child: !isLike[2]
+                                        ? Image.asset(
+                                            'assets/images/favorite_icon.png')
+                                        : const Icon(
+                                            Icons.favorite,
+                                            color: Colors.red,
+                                          ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ]),
+                            ]),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        InkWell(
+                          onTap: () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DetailView(
+                                        title: 'Brown Armchair',
+                                        price: '\$210',
+                                        image: 'assets/images/chair4.png',
+                                      ))),
+                          child: Container(
+                            padding: const EdgeInsets.only(top: 0),
+                            height: 170,
+                            width: double.infinity,
+                            child: Stack(children: [
+                              Card(
+                                  margin: const EdgeInsets.only(
+                                      right: 10, left: 10, bottom: 0),
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 130,
+                                        width: double.infinity,
+                                        child: Image.asset(
+                                          'assets/images/chair4.png',
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          child: Column(
+                                            children: [
+                                              const Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text('Brown Armchair'),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '\$210',
+                                                    style: TextStyle(
+                                                        color: grey,
+                                                        fontSize: 20),
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Image.asset(
+                                                          'assets/images/solidstar_icon.png'),
+                                                      const SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      Text(
+                                                        '4.9',
+                                                        style: TextStyle(
+                                                            color: grey),
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          )),
+                                    ],
+                                  )),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16, top: 8),
+                                child: Container(
+                                  height: 34,
+                                  width: 34,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: white),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isLike[3] = !isLike[3];
+                                      });
+                                    },
+                                    child: !isLike[3]
+                                        ? Image.asset(
+                                            'assets/images/favorite_icon.png')
+                                        : const Icon(
+                                            Icons.favorite,
+                                            color: Colors.red,
+                                          ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             const Center(

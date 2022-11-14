@@ -97,7 +97,7 @@ class _DetailViewState extends State<DetailView> {
               alignment: Alignment.bottomCenter,
               child: Container(
                   height: show
-                      ? MediaQuery.of(context).size.height / 2.6
+                      ? MediaQuery.of(context).size.height / 2.4
                       : MediaQuery.of(context).size.height / 20,
                   width: double.infinity,
                   decoration: BoxDecoration(
